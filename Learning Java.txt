@@ -13,7 +13,7 @@ ________________
 //tells the code to ignore the text for a line. If you want to make a quick comment in the code, use two slashes to indicate that.
 
 
-/*tells the code to ignore the text for more than one line. If you want to say something long about the code, use a slash and a star, *then a star for each line following. To end the multi-line comment, use a star before the slash AFTER the last line. 
+/*tells the code to ignore the text for more than one line. If you want to say something long about the code, use a slash and a *star, then a star for each line following. To end the multi-line comment, use a star before the slash AFTER the last line. 
 */
 
 
@@ -32,13 +32,20 @@ ________________
 
 
 Math is probably one of the most important things you need to know how to do in java. The math symbols we use when writing can be different in java. When you may write +,-,x,÷,≠, and =, java doesn’t write like you. The java symbols in order of add, subtract, multiply, divide, does not equal and equal are: +,-,*,/,!=, and =. So if you wanted a variable to be divided by two and then see if it’s not zero, you would say 
+
+
 General Programming
 ________________
+if(2+2=4) {
+/*When writing code in java, you need to have parenthesis next to it for math or variables. You can leave these empty if you want. *To make the code into a function that does something, you make brackets. If you're doing something like changing a variable to *"hi", you would put a semicolon to tell the code that you're ending a line. DO NOT FORGET THE SEMICOLONS!!!! Semicolons are super *important and your code will not work if you forget one. If I need to change a variable called hi to 3, I would simply type
+*/
 
+constant int hi;
+hi = 3;
 
+/*Notice how I used a semicolon to tell the computer my statement was over.
+}
 
+Normal Code
 
-if(2+2=4) {/*When writing code in java, you need to have parenthesis next to it for math or variables. You can leave *these empty if you want.
-
-
- }
+There is another code I put up as an example code that uses the basics of what I showed you here.
