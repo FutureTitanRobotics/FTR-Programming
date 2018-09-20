@@ -40,26 +40,26 @@ import com.qualcomm.robotcore.util.Range;
 //@Disabled
 public class OmniLinear extends LinearOpMode {
 
-   // Declare OpMode members.
+   //Create a container that stores time since the start button was pressed.
    private ElapsedTime runtime = new ElapsedTime();
 
-   DcMotor lmotor; //add four motors called lmotor(front left),rmotor(front right), fmotor(back left), bmotor(back right)
-   DcMotor rmotor;
-   DcMotor fmotor;
-   DcMotor bmotor;
+   DcMotor flmotor; //add four motors called flmotor(front left),frmotor(front right), blmotor(back left), brmotor(back right)
+   DcMotor frmotor;
+   DcMotor blmotor;
+   DcMotor brmotor;
 
 
    @Override
    public void runOpMode() { //start code
-       lmotor = hardwareMap.dcMotor.get("left"); //import the motors we showed earlier
-       rmotor = hardwareMap.dcMotor.get("right");
-       fmotor = hardwareMap.dcMotor.get("front");
-       bmotor = hardwareMap.dcMotor.get("back");
+       flmotor = hardwareMap.dcMotor.get("frontleft"); //import the motors we showed earlier
+       frmotor = hardwareMap.dcMotor.get("frontright");
+       blmotor = hardwareMap.dcMotor.get("backleft");
+       brmotor = hardwareMap.dcMotor.get("backright");
 
-       lmotor.setPower(0); //make sure all motors are stopped
-       rmotor.setPower(0);
-       fmotor.setPower(0);
-       bmotor.setPower(0);
+       flmotor.setPower(0); //make sure all motors are stopped
+       frmotor.setPower(0);
+       blmotor.setPower(0);
+       brmotor.setPower(0);
 
        telemetry.addData("Status", "Initialized"); //show on the phone that the code has started
        telemetry.update();
@@ -71,25 +71,27 @@ public class OmniLinear extends LinearOpMode {
                //Make forward and backward movement the up and down on the right joystick of the controller.
                double fb = gamepad1.right_stick_y;
               //Make forward and backward movement the up and down on the right joystick of the controller.                
-    double lr = gamepad1.right_stick_x;
+               double lr = gamepad1.right_stick_x;
                //Turn or rotate
                double turn = gamepad1.left_stick_x;
 
                if(turn != 0) {
                    lmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
-                    rmotor.setPower(turn);
+                   rmotor.setPower(turn);
                    fmotor.setPower(turn);
                    bmotor.setPower(turn);
                }
                else {
                    lmotor.setPower(0); //if the joystick is not being moved, stop all motors
-                    rmotor.setPower(0);
+                   rmotor.setPower(0);
                    fmotor.setPower(0);
                    bmotor.setPower(0);
                }
                if(fb != 0) {
-                   lmotor.setPower(fb); //if you want to go forward or backwards, move the motors this way
-                   rmotor.setPower(-fb);
+                   flmotor.setPower(fb); //if you want to go forward or backwards, move the motors this way
+                   frmotor.setPower(-fb);
+                   blmotor.setPower(fb);
+                   brmotor.setPower(-fb);
                }
                else {
                    lmotor.setPower(0); //if the joystick is not being moved, stop all motors
@@ -98,8 +100,10 @@ public class OmniLinear extends LinearOpMode {
                    bmotor.setPower(0);
                }
                if(lr != 0) {
-                   fmotor.setPower(lr); //if you want to go left or right, move the motors this way
-                   bmotor.setPower(-lr);
+                   flmotor.setPower(lr); //if you want to go forward or backwards, move the motors this way
+                   frmotor.setPower(lr);
+                   blmotor.setPower(-lr);
+                   brmotor.setPower(-lr);
                }
                else {
                    lmotor.setPower(0); //if the joystick is not being moved, stop all motors (again)
