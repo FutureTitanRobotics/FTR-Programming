@@ -19,10 +19,11 @@ ________________
 
 Variables
 ________________
-static int two: variables tell the code to store something, like a number, character, or string of characters. A variable will be seen with it’s variable type in front of it, and if the variable will change or not. for example, static String hi. That will tell the code that we want to store a word or a string of words and that we don’t want it to change. The container we’re storing it in is called hi. There are different types of variables: int, float, double, and String. int means you want to store a whole or negative number, float is any number with a decimal, a double is the same as a float, but a double can store up to 15 digits, and finally, a String is any combination of letters. 
+static int two: 
+/*variables tell the code to store something, like a number, character, or string of characters. A variable will be seen with it’s *variable type in front of it, and if the variable will change or not. for example, static String hi. That will tell the code that *we want to store a word or a string of words and that we don’t want it to change. The container we’re storing it in is called hi. *There are different types of variables: int, float, double, and String. int means you want to store a whole or negative number, *float is any number with a decimal, a double is the same as a float, but a double can store up to 15 digits, and finally, a String *is any combination of letters. 
+*/
 
-
-char and boolean variables: a char is any one letter that you want to store, and a boolean stores either true or false.
+char and boolean variables: //a char is any one letter that you want to store, and a boolean stores either true or false.
 
 
 
@@ -31,8 +32,8 @@ Math
 ________________
 
 
-Math is probably one of the most important things you need to know how to do in java. The math symbols we use when writing can be different in java. When you may write +,-,x,÷,≠, and =, java doesn’t write like you. The java symbols in order of add, subtract, multiply, divide, does not equal and equal are: +,-,*,/,!=, and =. So if you wanted a variable to be divided by two and then see if it’s not zero, you would say 
-
+/*Math is probably one of the most important things you need to know how to do in java. The math symbols we use when writing can be *different in java. When you may write +,-,x,÷,≠, and =, java doesn’t write like you. The java symbols in order of add, subtract, *multiply, divide, does not equal and equal are: +,-,*,/,!=, and =. So if you wanted a variable to be divided by two and then see *if it’s not zero, you would say 
+*/
 
 General Programming
 ________________
@@ -43,9 +44,9 @@ if(2+2=4) {
 constant int hi;
 hi = 3;
 
-/*Notice how I used a semicolon to tell the computer my statement was over.
+//Notice how I used a semicolon to tell the computer my statement was over.
 }
 
 Normal Code
 
-There is another code I put up as an example code that uses the basics of what I showed you here.
+There is a java code I put up as an example that uses the basics of what I showed you here, as well as what you learned after watching the videos.
