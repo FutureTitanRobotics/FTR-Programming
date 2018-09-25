@@ -36,7 +36,7 @@ import com.qualcomm.robotcore.hardware.DcMotor; //make said code usable with mot
 import com.qualcomm.robotcore.util.ElapsedTime; //make a timer
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Omni Prototype Test", group="Linear Opmode")
+@TeleOp(name="Tank/Omni Prototype Test", group="Linear Opmode")
 //@Disabled
 public class OmniLinear extends LinearOpMode {
 
