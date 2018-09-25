@@ -36,7 +36,27 @@ import com.qualcomm.robotcore.hardware.DcMotor; //make said code usable with mot
 import com.qualcomm.robotcore.util.ElapsedTime; //make a timer
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Tank/Omni Prototype Test", group="Linear Opmode")
+@TeleOp(name="TankDrive", group="Linear Opmode")
+//@Disabled
+public class TankLinear extends LinearOpMode {
+
+    //Create a container that stores time since the start button was pressed.
+    private ElapsedTime runtime = new ElapsedTime();
+
+    DcMotor flmotor; //add four motors called flmotor(front left),frmotor(front right), blmotor(back left), brmotor(back right)
+    DcMotor frmotor;
+    DcMotor blmotor;
+    DcMotor brmotor;
+
+
+    @Override
+    public void runOpMode() { //start code
+        flmotor = hardwareMap.dcMotor.get("frontleft"); //import the motors we showed earlier
+        frmotor = hardwareMap.dcMotor.get("frontright");
+        blmotor = hardwareMap.dcMotor.get("backleft");
+        brmotor = hardwareMap.dcMotor.get("backright");import com.qualcomm.robotcore.util.Range;
+
+@TeleOp(name="Omni Prototype Test", group="Linear Opmode")
 //@Disabled
 public class OmniLinear extends LinearOpMode {
 
@@ -70,11 +90,11 @@ public class OmniLinear extends LinearOpMode {
         while(opModeIsActive()) {
             //Make forward and backward movement the up and down on the right joystick of the controller.
             double fb = gamepad1.right_stick_y;
-            //Make forward and backward movement the up and down on the right joystick of the controller.
-            double lr = gamepad1.right_stick_x;
             //Turn or rotate
             double turn = gamepad1.left_stick_x;
 
+            String telemetryFb
+                
             if(turn != 0) {
                 flmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 frmotor.setPower(turn);
@@ -120,6 +140,78 @@ public class OmniLinear extends LinearOpMode {
 
         // Show the elapsed game time.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
+        telemetry.update();
+    }
+}
+
+        flmotor.setPower(0); //make sure all motors are stopped
+        frmotor.setPower(0);
+        blmotor.setPower(0);
+        brmotor.setPower(0);
+
+        telemetry.addData("Status", "Initialized"); //show on the phone that the code has started
+        telemetry.update();
+
+        // Wait for the game to start (driver presses PLAY)
+        waitForStart();
+        runtime.reset();
+        while(opModeIsActive()) {
+            //Make forward and backward movement the up and down on the right joystick of the controller.
+            double fb = gamepad1.right_stick_y;
+            //Turn or rotate with the left joystick
+            double turn = gamepad1.left_stick_x;
+            
+            String telemetryFB = "Hi"
+
+            if(turn <0) {
+                flmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
+                frmotor.setPower(turn);
+                blmotor.setPower(turn);
+                brmotor.setPower(turn);
+            }
+            else {
+                flmotor.setPower(0); //if the joystick is not being moved, stop all motors
+                frmotor.setPower(0);
+                blmotor.setPower(0);
+                brmotor.setPower(0);
+            }         
+            if(turn > 0) {
+                flmotor.setPower(-turn); //make the speed on the motor equal to the power on the joystick to spin left or right
+                frmotor.setPower(-turn);
+                blmotor.setPower(-turn);
+                brmotor.setPower(-turn);
+            }
+            else {
+                flmotor.setPower(0); //if the joystick is not being moved, stop all motors
+                frmotor.setPower(0);
+                blmotor.setPower(0);
+                brmotor.setPower(0);
+            }
+            if(fb != 0) {
+                flmotor.setPower(-fb); //if you want to go forward or backwards, move the motors this way
+                frmotor.setPower(fb);
+                blmotor.setPower(-fb);
+                brmotor.setPower(fb);
+            }
+            else {
+                flmotor.setPower(0); //if the joystick is not being moved, stop all motors
+                frmotor.setPower(0);
+                blmotor.setPower(0);
+                brmotor.setPower(0);
+            }
+            if(fb > 0) {
+                
+            }
+        }
+
+        flmotor.setPower(0); //all motors stopped at the end of the game
+        frmotor.setPower(0);
+        blmotor.setPower(0);
+        brmotor.setPower(0);
+
+        // Show the elapsed game time.
+        telemetry.addData("Status", "Run Time: " + runtime.toString());
+        telemetry.addData("Forward and backward movement: " + fb);
         telemetry.update();
     }
 }
