@@ -29,25 +29,11 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;// Add things so we can use them later
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
-
-/**
- * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
- * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
- * of the FTC Driver Station. When an selection is made from the menu, the corresponding OpMode
- * class is instantiated on the Robot Controller and executed.
- *
- * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
- * It includes all the skeletal structure that all linear OpModes contain.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
 
 @TeleOp(name="TankDrive", group="Linear Opmode")
 //@Disabled
@@ -55,19 +41,19 @@ public class TankDriveUpdated extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor lmotor = null;
+    private DcMotor lmotor = null;// Let our motors (l and r for left and right) access the code
     private DcMotor rmotor = null;
 
     @Override
-    public void runOpMode() {
-        telemetry.addData("Status", "Initialized");
+    public void runOpMode() {// Start the code ("INIT" is pressed)
+        telemetry.addData("Status", "Initialized");// Show text on the phone that we've pressed the "INIT" button
         telemetry.update();
 
-        //create 4 new motors
+        // create 2 new motors (l and r for left and right)
         DcMotor lmotor = hardwareMap.get(DcMotor.class, "left_motor");
         DcMotor rmotor = hardwareMap.get(DcMotor.class, "right_motor");
 
-        //the two right motors have been reversed because when building, they are flipped over.
+        // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.FORWARD);
         rmotor.setDirection(DcMotor.Direction.REVERSE);
 
@@ -86,21 +72,21 @@ public class TankDriveUpdated extends LinearOpMode {
                 lmotor.setPower(-turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 rmotor.setPower(turn);
             }
-            else if(turn > 0) {
+            else if(turn > 0.1 && turn < -0.1) {
                 lmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 rmotor.setPower(-turn);
             }
-            else if(fb != 0) {
+            else if(fb > 0.1 && fb < -0.1) {
                 lmotor.setPower(fb); //if you want to go forward or backwards, move the motors the same way as the joystick says
                 rmotor.setPower(fb);
             }
             else {
-                lmotor.setPower(0); //if the joystick is not being moved, stop all motors
+                lmotor.setPower(0); // If the joystick is not being moved, stop all motors
                 rmotor.setPower(0);
             }
         }
 
-        lmotor.setPower(0); //all motors stopped at the end of the game
+        lmotor.setPower(0); // Stop all motors at the end of the game
         rmotor.setPower(0);
 
         // Show the elapsed game time at the end of the match
