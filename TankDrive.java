@@ -68,11 +68,11 @@ public class TankDriveUpdated extends LinearOpMode {
                     //Turn or rotate with the left joystick
             double turn = gamepad1.right_stick_x;
 
-            if(turn < 0) {
+            if(turn > 0.1) {
                 lmotor.setPower(-turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 rmotor.setPower(turn);
             }
-            else if(turn > 0.1 || turn < -0.1) {
+            else if(turn < -0.1) {
                 lmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 rmotor.setPower(-turn);
             }
