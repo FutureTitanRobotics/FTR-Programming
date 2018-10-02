@@ -35,9 +35,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="TankDrive", group="Linear Opmode")
+@TeleOp(name="TankWheels", group="Linear Opmode")
 //@Disabled
-public class TankDriveUpdated extends LinearOpMode {
+public class TankWheels extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
