@@ -64,10 +64,10 @@ public class OmniWheels extends LinearOpMode {
         telemetry.addData("Status", "Initialized"); //show on the phone that the code has started
         telemetry.update();
         
-        flmotor.setDirection(DcMotor.Direction.FORWARD);
-        frmotor.setDirection(DcMotor.Direction.REVERSE);
-        blmotor.setDirection(DcMotor.Direction.FORWARD);
-        brmotor.setDirection(DcMotor.Direction.REVERSE);
+        flmotor.setDirection(DcMotor.Direction.REVERSE);
+        frmotor.setDirection(DcMotor.Direction.FORWARD);
+        blmotor.setDirection(DcMotor.Direction.REVERSE);
+        brmotor.setDirection(DcMotor.Direction.FORWARD);
         
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
