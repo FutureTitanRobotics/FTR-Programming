@@ -36,17 +36,17 @@ import com.qualcomm.robotcore.hardware.DcMotor; //make said code usable with mot
 import com.qualcomm.robotcore.util.ElapsedTime; //make a timer
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Omni Prototype Test", group="Linear Opmode")
+@TeleOp(name="OmniWheels", group="Linear Opmode")
 //@Disabled
-public class OmniLinear extends LinearOpMode {
+public class OmniWheels extends LinearOpMode {
 
     //Create a container that stores time since the start button was pressed.
     private ElapsedTime runtime = new ElapsedTime();
 
-    DcMotor flmotor; //add four motors called flmotor(front left),frmotor(front right), blmotor(back left), brmotor(back right)
-    DcMotor frmotor;
-    DcMotor blmotor;
-    DcMotor brmotor;
+    private DcMotor flmotor = null; //add four motors called flmotor(front left),frmotor(front right), blmotor(back left), brmotor(back right)
+    private DcMotor frmotor = null;
+    private DcMotor blmotor = null;
+    private DcMotor brmotor = null;
 
 
     @Override
@@ -63,7 +63,12 @@ public class OmniLinear extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized"); //show on the phone that the code has started
         telemetry.update();
-
+        
+        flmotor.setDirection(DcMotor.Direction.FORWARD);
+        frmotor.setDirection(DcMotor.Direction.REVERSE);
+        blmotor.setDirection(DcMotor.Direction.FORWARD);
+        brmotor.setDirection(DcMotor.Direction.REVERSE);
+        
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -77,9 +82,9 @@ public class OmniLinear extends LinearOpMode {
 
             if(turn != 0) {
                 flmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
-                frmotor.setPower(turn);
+                frmotor.setPower(-turn);
                 blmotor.setPower(turn);
-                brmotor.setPower(turn);
+                brmotor.setPower(-turn);
             }
             else {
                 flmotor.setPower(0); //if the joystick is not being moved, stop all motors
@@ -89,9 +94,9 @@ public class OmniLinear extends LinearOpMode {
             }
             if(fb != 0) {
                 flmotor.setPower(fb); //if you want to go forward or backwards, move the motors this way
-                frmotor.setPower(-fb);
+                frmotor.setPower(fb);
                 blmotor.setPower(fb);
-                brmotor.setPower(-fb);
+                brmotor.setPower(fb);
             }
             else {
                 flmotor.setPower(0); //if the joystick is not being moved, stop all motors
@@ -102,8 +107,8 @@ public class OmniLinear extends LinearOpMode {
             if(lr != 0) {
                 flmotor.setPower(lr); //if you want to go forward or backwards, move the motors this way
                 frmotor.setPower(lr);
-                blmotor.setPower(-lr);
-                brmotor.setPower(-lr);
+                blmotor.setPower(lr);
+                brmotor.setPower(lr);
             }
             else {
                 flmotor.setPower(0); //if the joystick is not being moved, stop all motors (again)
