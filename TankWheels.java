@@ -54,8 +54,8 @@ public class TankWheels extends LinearOpMode {
         DcMotor rmotor = hardwareMap.get(DcMotor.class, "right_motor");
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
-        lmotor.setDirection(DcMotor.Direction.FORWARD);
-        rmotor.setDirection(DcMotor.Direction.REVERSE);
+        lmotor.setDirection(DcMotor.Direction.REVERSE);
+        rmotor.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
