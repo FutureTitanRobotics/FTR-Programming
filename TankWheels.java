@@ -69,12 +69,12 @@ public class TankWheels extends LinearOpMode {
             double turn = gamepad1.right_stick_x;
 
             if(turn > 0.1) {
-                lmotor.setPower(-turn); //make the speed on the motor equal to the power on the joystick to spin left or right
-                rmotor.setPower(turn);
-            }
-            else if(turn < -0.1) {
                 lmotor.setPower(turn); //make the speed on the motor equal to the power on the joystick to spin left or right
                 rmotor.setPower(-turn);
+            }
+            else if(turn < -0.1) {
+                lmotor.setPower(-turn); //make the speed on the motor equal to the power on the joystick to spin left or right
+                rmotor.setPower(turn);
             }
             else if(fb > 0.1 || fb < -0.1) {
                 lmotor.setPower(fb); //if you want to go forward or backwards, move the motors the same way as the joystick says
