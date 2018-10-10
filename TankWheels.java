@@ -41,8 +41,11 @@ public class TankWheels extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor lmotor = null;// Let our motors (l and r for left and right) access the code
-    private DcMotor rmotor = null;
+    //private DcMotor lmotor = null; // looking at the First sample programs, these are irrelevant. I don't want to remove them in case they are used later.
+    //private DcMotor rmotor = null;
+
+    DcMotor lmotor;
+    DcMotor rmotor;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -50,8 +53,8 @@ public class TankWheels extends LinearOpMode {
         telemetry.update();
 
         // create 2 new motors (l and r for left and right)
-        DcMotor lmotor = hardwareMap.get(DcMotor.class, "left_motor");
-        DcMotor rmotor = hardwareMap.get(DcMotor.class, "right_motor");
+        DcMotor lmotor = hardwareMap.get(DcMotor.class, "l_motor");
+        DcMotor rmotor = hardwareMap.get(DcMotor.class, "r_motor");
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
