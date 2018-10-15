@@ -4,9 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="TankDrive", group="Linear Opmode")
+@TeleOp(name"//delete this and put name here", group="Linear Opmode")
 @Disabled
-public class TankDrive extends LinearOpMode {
+public class "//delete this and put name here//" extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
