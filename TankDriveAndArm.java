@@ -35,9 +35,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="TankDrive", group="Linear Opmode")
+@TeleOp(name="TankDriveAndArm", group="Linear Opmode")
 //@Disabled
-public class TankDrive extends LinearOpMode {
+public class TankDriveAndArm extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -46,6 +46,7 @@ public class TankDrive extends LinearOpMode {
 
     DcMotor lmotor;
     DcMotor rmotor;
+    DcMotor arm;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -55,13 +56,13 @@ public class TankDrive extends LinearOpMode {
         // create 2 new motors (l and r for left and right)
         lmotor = hardwareMap.get(DcMotor.class, "left_drive");
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
-        armMotor = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
+        arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
         ROBOT AS EXACTLY arm_motor, or else things will go wrong*/
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
         rmotor.setDirection(DcMotor.Direction.FORWARD);
-        armMotor.setDirection(DcMotor.Direction.FORWARD);
+        arm.setDirection(DcMotor.Direction.FORWARD);
         
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -85,24 +86,23 @@ public class TankDrive extends LinearOpMode {
                 rmotor.setPower(0);
             }
             if (gamepad1.a) {
-                armMotor.setPower(0.5);
-                sleep(1000);
-                armMotor.setPower(0.0);
+                arm.setPower(0.3);
+                sleep(5);
+                arm.setPower(0);
             } 
-            else if (gamepad1.b){
-                armMotor.setPower(-0.5);
-                sleep(1000);
-                armMotor.setPower(0.0);
+            else if (gamepad1.b) {
+                arm.setPower(-0.3);
+                sleep(5);
+                arm.setPower(0);
             }
-            else {
-                armMotor.setPower(0.0);
+            else if (!gamepad1.a && !gamepad1.b) {
+                arm.setPower(0);
             }
-            
         }
 
         lmotor.setPower(0.0); // Stop all motors at the end of the game
         rmotor.setPower(0.0);
-        armMotor.setPower(0.0);
+        arm.setPower(0.0);
 
         // Show the elapsed game time at the end of the match
         telemetry.addData("Status", "Run Time: " + runtime.toString());
