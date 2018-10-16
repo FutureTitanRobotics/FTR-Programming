@@ -32,6 +32,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name="TankDrive", group="Linear Opmode")
@@ -54,11 +55,14 @@ public class TankDrive extends LinearOpMode {
         // create 2 new motors (l and r for left and right)
         lmotor = hardwareMap.get(DcMotor.class, "left_drive");
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
+        armMotor = hardwareMap.get(DcMotor.class, "arm_motor"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
+        ROBOT AS EXACTLY arm_motor, or else things will go wrong*/
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
         rmotor.setDirection(DcMotor.Direction.FORWARD);
-
+        armMotor.setDirection(DcMotor.Direction.FORWARD);
+        
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -80,10 +84,25 @@ public class TankDrive extends LinearOpMode {
                 lmotor.setPower(0); // If the joystick is not being moved, stop all motors
                 rmotor.setPower(0);
             }
+            if (gamepad1.a) {
+                armMotor.setPower(0.5);
+                sleep(1000);
+                armMotor.setPower(0.0);
+            } 
+            else if (gamepad1.b){
+                armMotor.setPower(-0.5);
+                sleep(1000);
+                armMotor.setPower(0.0);
+            }
+            else {
+                armMotor.setPower(0.0);
+            }
+            
         }
 
-        lmotor.setPower(0); // Stop all motors at the end of the game
-        rmotor.setPower(0);
+        lmotor.setPower(0.0); // Stop all motors at the end of the game
+        rmotor.setPower(0.0);
+        armMotor.setPower(0.0);
 
         // Show the elapsed game time at the end of the match
         telemetry.addData("Status", "Run Time: " + runtime.toString());
