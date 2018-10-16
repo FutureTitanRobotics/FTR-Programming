@@ -47,6 +47,7 @@ public class TankDriveAndArm extends LinearOpMode {
     DcMotor lmotor;
     DcMotor rmotor;
     DcMotor arm;
+    Servo elbow;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -58,6 +59,7 @@ public class TankDriveAndArm extends LinearOpMode {
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
         arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
         ROBOT AS EXACTLY arm_motor, or else things will go wrong*/
+        elbow = hardwareMap.get(Servo.class, "armservo");
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
@@ -74,7 +76,9 @@ public class TankDriveAndArm extends LinearOpMode {
             double left = gamepad1.left_stick_y;
             //Turn or rotate with the left joystick
             double right = gamepad1.right_stick_y;
-
+            
+            double position = 0;
+            
             if (left < 0.1 || left > -0.1) {
                 lmotor.setPower(left);
             }
@@ -97,7 +101,21 @@ public class TankDriveAndArm extends LinearOpMode {
             }
             else if (!gamepad1.a && !gamepad1.b) {
                 arm.setPower(0);
+                
+            
             }
+            else if (gamepad1.y){
+                if (position < 1){
+                position = position + 0.1;
+                }
+                elbow.setPosition(position);
+            }
+            else if (gamepad1.x){
+                if (position > 0){
+                    position = position - 0.1;
+                }
+                elbow.setPosition(position)
+                
         }
 
         lmotor.setPower(0.0); // Stop all motors at the end of the game
