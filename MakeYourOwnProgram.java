@@ -5,27 +5,19 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name"Jacob", group="Linear Opmode")
+@TeleOp(name"//Name Here", group="Linear Opmode")
 @Disabled
-public class "Jacob" extends LinearOpMode { 
+public class "//Name Here" extends LinearOpMode { 
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    
-    DcMotor leftMotor;
-    DcMotor rightMotor;
-    
-    double power = 0.5;
+
 
     @Override
     public void runOpMode() { // Start the code ("INIT" is pressed)
         telemetry.addData("Status", "Initialized");// Show text on the phone that we've pressed the "INIT" button
         telemetry.update();
-
-        leftMotor = hardwareMap.dcMotor.get("Left_Motor");
-        rightMotor = hardwareMap.dcMotor.get("Right_Motor");
         
-        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
