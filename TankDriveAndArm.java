@@ -59,7 +59,7 @@ public class TankDriveAndArm extends LinearOpMode {
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
         arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
         ROBOT AS EXACTLY arm_motor, or else things will go wrong*/
-        elbow = hardwareMap.get(Servo.class, "armservo");
+        elbow = hardwareMap.servo.get("armservo");
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
