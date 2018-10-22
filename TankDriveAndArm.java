@@ -78,6 +78,11 @@ public class TankDriveAndArm extends LinearOpMode {
             double right = gamepad1.right_stick_y;
             
             double position = 0;
+            //WIP
+           // double int tick = 1440;
+            
+            //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+           // arm.setTargetPosition((int)1440);
             
             if (left < 0.1 || left > -0.1) {
                 lmotor.setPower(left);
