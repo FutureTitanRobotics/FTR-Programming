@@ -58,7 +58,7 @@ public class TankDriveAndArm extends LinearOpMode {
         lmotor = hardwareMap.get(DcMotor.class, "left_drive");
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
         arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
-        ROBOT AS EXACTLY arm_motor, or else things will go wrong*/
+        ROBOT AS EXACTLY "arm", or else things will go wrong*/
         elbow = hardwareMap.servo.get("armservo");
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
@@ -94,27 +94,22 @@ public class TankDriveAndArm extends LinearOpMode {
                 sleep(5);
                 arm.setPower(0);
             } 
-            else if (gamepad1.b) {
+            if (gamepad1.b) {
                 arm.setPower(-0.3);
                 sleep(5);
                 arm.setPower(0);
-            }
-            else if (!gamepad1.a && !gamepad1.b) {
+            } 
+            else {
                 arm.setPower(0);
-                
-            
             }
-            else if (gamepad1.y){
-                if (position < 1){
+            if (gamepad1.y && position < 1){
                 position = position + 0.1;
-                }
                 elbow.setPosition(position);
             }
-            else if (gamepad1.x){
-                if (position > 0){
+            if (gamepad1.x && position > 0){
                     position = position - 0.1;
-                }
                 elbow.setPosition(position)
+            }
                 
         }
 
