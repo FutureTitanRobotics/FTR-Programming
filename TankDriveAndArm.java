@@ -106,6 +106,7 @@ public class TankDriveAndArm extends LinearOpMode {
             } 
             else {
                 arm.setPower(0);
+                arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             }
             if (gamepad1.y && position < 1){
                 position = position + 0.1;
