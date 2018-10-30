@@ -47,7 +47,9 @@ public class TankDriveAndArm extends LinearOpMode {
     DcMotor lmotor;
     DcMotor rmotor;
     DcMotor arm;
-    Servo elbow;
+    DcMotor arm2;
+    DcMotor collect;
+    //Servo armservo;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -58,13 +60,18 @@ public class TankDriveAndArm extends LinearOpMode {
         lmotor = hardwareMap.get(DcMotor.class, "left_drive");
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
         arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
-        ROBOT AS EXACTLY "arm", or else things will go wrong*/
-        elbow = hardwareMap.servo.get("armservo");
+        ROBOT AS EXACTLY arm, or else things will go wrong*/
+        arm2 = hardwareMap.get(DcMotor.class, "arm2");
+        collect = hardwareMap.get(DcMotor.class, "collect");
+        //armservo = hardwareMap.servo.get("armservo");
+
+        //double position = 1;
+        //double servopos = 1;
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
-        rmotor.setDirection(DcMotor.Direction.FORWARD);
-        arm.setDirection(DcMotor.Direction.FORWARD);
+        //rmotor.setDirection(DcMotor.Direction.FORWARD);
+        //arm.setDirection(DcMotor.Direction.FORWARD);
         
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -77,48 +84,35 @@ public class TankDriveAndArm extends LinearOpMode {
             //Turn or rotate with the left joystick
             double right = gamepad1.right_stick_y;
             
-            double position = 0;
-            //WIP
-           // double int tick = 1440;
-            
-            //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-           // arm.setTargetPosition((int)1440);
-            
-            if (left < 0.1 || left > -0.1) {
+            if (left < 0.1 || left > -0.1) {//set the left motor to the power of the left joystick
                 lmotor.setPower(left);
             }
-            if (right < 0.1 || right > -0.1) {
+            if (right < 0.1 || right > -0.1) {//set the right motor to the power of the righ joystick
                 rmotor.setPower(right);
             }
             else {
-                lmotor.setPower(0); // If the joystick is not being moved, stop all motors
+                lmotor.setPower(0); // If the joysticks are not being moved, stop all motors
                 rmotor.setPower(0);
             }
-            if (gamepad1.a) {
-                arm.setPower(0.3);
-                sleep(5);
-                arm.setPower(0);
-            } 
-            if (gamepad1.b) {
+            if (gamepad2.a) {// when the a button is pressed
                 arm.setPower(-0.3);
+                arm2.setPower(0.3);
                 sleep(5);
                 arm.setPower(0);
+                arm2.setPower(0);
             } 
-            else {
+            else if (gamepad2.b) {
+                arm.setPower(0.3);
+                arm2.setPower(-0.3);
+                sleep(5);
                 arm.setPower(0);
-                arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+                arm2.setPower(0);
             }
-            if (gamepad1.y && position < 1){
-                position = position + 0.1;
-                elbow.setPosition(position);
+            else if (!gamepad2.a && !gamepad2.b) {
+                arm.setPower(0);
+                arm2.setPower(0);
             }
-            if (gamepad1.x && position > 0){
-                    position = position - 0.1;
-                elbow.setPosition(position)
-            }
-                
         }
-
         lmotor.setPower(0.0); // Stop all motors at the end of the game
         rmotor.setPower(0.0);
         arm.setPower(0.0);
