@@ -3,6 +3,6 @@ Our deadline is in 16 days. We are going to have to test the servo with no weigh
 
 ### Dates
 
-###FTC Competition 1: November 17, 2018 
+#### FTC Competition 1: November 17, 2018 
 Mr. Sample is trying to get us into a later match, so we may have more time.
-###FTC Competition 2: TBD
+#### FTC Competition 2: TBD
