@@ -48,8 +48,8 @@ public class TankDriveAndArm extends LinearOpMode {
     DcMotor rmotor;
     DcMotor arm;
     DcMotor arm2;
-    DcMotor collect;
-    //Servo armservo;
+    //DcMotor collect;
+    Servo armservo;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -62,8 +62,8 @@ public class TankDriveAndArm extends LinearOpMode {
         arm = hardwareMap.get(DcMotor.class, "arm"); /*MAKE SURE THIS IS IN THE HARDWARE MAP ON THE
         ROBOT AS EXACTLY arm, or else things will go wrong*/
         arm2 = hardwareMap.get(DcMotor.class, "arm2");
-        collect = hardwareMap.get(DcMotor.class, "collect");
-        //armservo = hardwareMap.servo.get("armservo");
+        //collect = hardwareMap.get(DcMotor.class, "collect");
+        armservo = hardwareMap.servo.get("armservo");
 
         //double position = 1;
         //double servopos = 1;
@@ -97,25 +97,33 @@ public class TankDriveAndArm extends LinearOpMode {
             if (gamepad2.a) {// when the a button is pressed
                 arm.setPower(-0.3);
                 arm2.setPower(0.3);
-                sleep(5);
+                sleep(0.1);
                 arm.setPower(0);
                 arm2.setPower(0);
             } 
             else if (gamepad2.b) {
                 arm.setPower(0.3);
                 arm2.setPower(-0.3);
-                sleep(5);
+                sleep(0.1);
                 arm.setPower(0);
                 arm2.setPower(0);
             }
             else if (!gamepad2.a && !gamepad2.b) {
+                DcMotor.ZeroPowerBehavior BRAKE
                 arm.setPower(0);
                 arm2.setPower(0);
+            }
+            if (gamepad2.x) {
+                armservo.setPosition(armservo.getPosition() + 0.1);
+            }
+            else if (gamepad2.y) {
+                armservo.setPosition(armservo.getPosition() - 0.1);
             }
         }
         lmotor.setPower(0.0); // Stop all motors at the end of the game
         rmotor.setPower(0.0);
         arm.setPower(0.0);
+        arm2.setPower(0.0);
 
         // Show the elapsed game time at the end of the match
         telemetry.addData("Status", "Run Time: " + runtime.toString());
