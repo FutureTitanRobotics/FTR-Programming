@@ -50,6 +50,7 @@ public class TankDriveAndArm extends LinearOpMode {
     DcMotor arm2;
     //DcMotor collect;
     Servo armservo;
+    Servo armservo2;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -64,15 +65,15 @@ public class TankDriveAndArm extends LinearOpMode {
         arm2 = hardwareMap.get(DcMotor.class, "arm2");
         //collect = hardwareMap.get(DcMotor.class, "collect");
         armservo = hardwareMap.servo.get("armservo");
+        armservo2 = hardwareMap.servo.get("armservo2");
 
-        //double position = 1;
-        //double servopos = 1;
+        double servopos = 0.0;
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
         //rmotor.setDirection(DcMotor.Direction.FORWARD);
         //arm.setDirection(DcMotor.Direction.FORWARD);
-        
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
@@ -84,46 +85,54 @@ public class TankDriveAndArm extends LinearOpMode {
             //Turn or rotate with the left joystick
             double right = gamepad1.right_stick_y;
             
-            if (left < 0.1 || left > -0.1) {//set the left motor to the power of the left joystick
-                lmotor.setPower(left);
+            if (left < 0.1 || left > -0.1) { //set the left motor to the power of the left joystick
+                lmotor.setPower(left * 0.75);
             }
-            if (right < 0.1 || right > -0.1) {//set the right motor to the power of the righ joystick
-                rmotor.setPower(right);
+            if (right < 0.1 || right > -0.1) { //set the right motor to the power of the righ joystick
+                rmotor.setPower(right * 0.75);
             }
             else {
                 lmotor.setPower(0); // If the joysticks are not being moved, stop all motors
                 rmotor.setPower(0);
             }
-            if (gamepad2.a) {// when the a button is pressed
+
+            if (gamepad2.a) { // when the a button is pressed, move the arm forward
                 arm.setPower(-0.3);
                 arm2.setPower(0.3);
-                sleep(0.1);
+                sleep(5);
                 arm.setPower(0);
                 arm2.setPower(0);
             } 
-            else if (gamepad2.b) {
+            else if (gamepad2.b) { // when the b button is pressed, move the arm backwards
                 arm.setPower(0.3);
                 arm2.setPower(-0.3);
-                sleep(0.1);
+                sleep(5);
                 arm.setPower(0);
                 arm2.setPower(0);
             }
-            else if (!gamepad2.a && !gamepad2.b) {
-                DcMotor.ZeroPowerBehavior BRAKE
+            else if (!gamepad2.a) { // if a and b aren't being used, don't move the arms.
                 arm.setPower(0);
                 arm2.setPower(0);
             }
-            if (gamepad2.x) {
-                armservo.setPosition(armservo.getPosition() + 0.1);
+            else if (!gamepad2.b) {
+                arm.setPower(0);
+                arm2.setPower(0);
             }
-            else if (gamepad2.y) {
-                armservo.setPosition(armservo.getPosition() - 0.1);
+
+            if (gamepad2.y) { //if y is pressed, make the elbow move up
+                servopos += 0.1;
+                armservo.setPosition(servopos);
+                armservo2.setPosition(-servopos);
+            }
+            else if (gamepad2.x) {//if x is pressed, make the elbow move down
+                servopos -=0.1;
+                armservo.setPosition(servopos);
+                armservo2.setPosition(-servopos);
             }
         }
         lmotor.setPower(0.0); // Stop all motors at the end of the game
         rmotor.setPower(0.0);
         arm.setPower(0.0);
-        arm2.setPower(0.0);
 
         // Show the elapsed game time at the end of the match
         telemetry.addData("Status", "Run Time: " + runtime.toString());
