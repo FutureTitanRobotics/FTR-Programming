@@ -125,7 +125,7 @@ public class TankDriveAndArm extends LinearOpMode {
                 armservo2.setPosition(-servopos);
             }
             else if (gamepad2.x) {//if x is pressed, make the elbow move down
-                servopos -=0.1;
+                servopos -= 0.1;
                 armservo.setPosition(servopos);
                 armservo2.setPosition(-servopos);
             }
