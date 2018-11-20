@@ -123,11 +123,13 @@ public class TankDriveAndArm extends LinearOpMode {
                 servopos += 0.1;
                 armservo.setPosition(servopos);
                 armservo2.setPosition(-servopos);
+                sleep(150);
             }
             else if (gamepad2.x) {//if x is pressed, make the elbow move down
                 servopos -= 0.1;
                 armservo.setPosition(servopos);
                 armservo2.setPosition(-servopos);
+                sleep(150);
             }
         }
         lmotor.setPower(0.0); // Stop all motors at the end of the game
