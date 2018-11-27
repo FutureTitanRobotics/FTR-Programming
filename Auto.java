@@ -78,18 +78,18 @@ public class Auto extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
+        // run until the end of the period (driver presses STOP)
         while (opModeIsActive()) {
             if () {
 
             }
         }
 
-        lmotor.setPower(0.0); // Stop all motors at the end of the game
+        lmotor.setPower(0.0); // Stop all motors at the end of autonomous
         rmotor.setPower(0.0);
         arm.setPower(0.0);
 
-        // Show the elapsed game time at the end of the match
+        // Show the elapsed game time at the end of autonomous
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.update();
     }
