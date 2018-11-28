@@ -268,13 +268,13 @@ public class Auto extends LinearOpMode {
                     if (robotLocationTransform != null) {
                         lastLocation = robotLocationTransform;
                     }
-                    break;
                 }
             }
 
-// If the Rover target is visible, do these actions.
+            // If the Rover target is visible, do these actions.
             if (targetVisible) {
                 for (VuforiaTrackable trackable : allTrackables) {
+                    sleep(15);
                     if (trackable.getName() == "Blue-Rover") {
                         telemetry.addLine("Beginning Auto code for rover VuMark.");
                         telemetry.update();
@@ -286,7 +286,7 @@ public class Auto extends LinearOpMode {
                         marker.setPosition(0.65);
                         sleep(29990);
                     }
-                    if (trackable.getName() == "Front-Craters") {
+                    else if (trackable.getName() == "Front-Craters") {
                         telemetry.addLine("Beginning Auto code for crater VuMark.");
                         telemetry.update();
                         lmotor.setPower(0.3);
