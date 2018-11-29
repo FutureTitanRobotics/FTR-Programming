@@ -254,6 +254,12 @@ public class Auto extends LinearOpMode {
         /** Start tracking the data sets we care about. */
         targetsRoverRuckus.activate();
         while (opModeIsActive()) {
+            lmotor.setPower(0.4);
+            rmotor.setPower(0.4);
+            sleep(1);
+            lmotor.setPower(0);
+            rmotor.setPower(0);
+            sleep(6000);
 
             // check all the trackable target to see which one (if any) is visible.
             targetVisible = false;
@@ -268,13 +274,7 @@ public class Auto extends LinearOpMode {
                     if (robotLocationTransform != null) {
                         lastLocation = robotLocationTransform;
                     }
-                }
-            }
 
-            // If the Rover target is visible, do these actions.
-            if (targetVisible) {
-                for (VuforiaTrackable trackable : allTrackables) {
-                    sleep(15);
                     if (trackable.getName() == "Blue-Rover") {
                         telemetry.addLine("Beginning Auto code for rover VuMark.");
                         telemetry.update();
@@ -282,6 +282,7 @@ public class Auto extends LinearOpMode {
                         rmotor.setPower(0.3);
                         sleep(1000);
                         lmotor.setPower(0);
+                        sleep(700);
                         rmotor.setPower(0);
                         marker.setPosition(0.65);
                         sleep(29990);
@@ -320,11 +321,12 @@ public class Auto extends LinearOpMode {
                         sleep(29990);
                     }
                 }
+                else {
+                    telemetry.addData("Visible Target", "none");
+                }
             }
 
-            else {
-                telemetry.addData("Visible Target", "none");
-            }
+
             telemetry.update();
         }
     }
