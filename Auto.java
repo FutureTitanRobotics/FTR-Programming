@@ -31,7 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+//import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -254,9 +254,9 @@ public class Auto extends LinearOpMode {
         /** Start tracking the data sets we care about. */
         targetsRoverRuckus.activate();
         while (opModeIsActive()) {
-            lmotor.setPower(0.4);
-            rmotor.setPower(0.4);
-            sleep(1);
+            lmotor.setPower(0.3);
+            rmotor.setPower(0.3);
+            sleep(1000);
             lmotor.setPower(0);
             rmotor.setPower(0);
             sleep(6000);
@@ -278,46 +278,79 @@ public class Auto extends LinearOpMode {
                     if (trackable.getName() == "Blue-Rover") {
                         telemetry.addLine("Beginning Auto code for rover VuMark.");
                         telemetry.update();
+
                         lmotor.setPower(0.3);
                         rmotor.setPower(0.3);
-                        sleep(1000);
+                        sleep(1100);
+
                         lmotor.setPower(0);
-                        sleep(700);
                         rmotor.setPower(0);
+
                         marker.setPosition(0.65);
+                        sleep(1700);
+
+                        marker.setPosition(0);
+                        sleep(2000);
+
+                        lmotor.setPower(-0.3);
+                        rmotor.setPower(-0.3);
+                        sleep(1300);
+
+                        lmotor.setPower(0);
+                        rmotor.setPower(0);
                         sleep(29990);
                     }
                     else if (trackable.getName() == "Front-Craters") {
                         telemetry.addLine("Beginning Auto code for crater VuMark.");
                         telemetry.update();
+
                         lmotor.setPower(0.3);
                         rmotor.setPower(0.3);
-                        sleep(1000);
+                        sleep(300);
+
                         lmotor.setPower(0);
                         rmotor.setPower(0);
-                        marker.setPosition(0.65);
+
                         sleep(29990);
                     }
                     else if (trackable.getName() == "Red-Footprint") {
                         telemetry.addLine("Beginning Auto code for footprint VuMark.");
                         telemetry.update();
+
                         lmotor.setPower(0.3);
                         rmotor.setPower(0.3);
-                        sleep(1000);
+                        sleep(1100);
+
                         lmotor.setPower(0);
                         rmotor.setPower(0);
+
                         marker.setPosition(0.65);
+                        sleep(1700);
+
+                        marker.setPosition(0);
+                        sleep(2000);
+
+                        lmotor.setPower(-0.3);
+                        rmotor.setPower(-0.3);
+                        sleep(1300);
+
+                        lmotor.setPower(0);
+                        rmotor.setPower(0);
                         sleep(29990);
+
+
                     }
                     else if (trackable.getName() == "Back-Space") {
                         telemetry.addLine("Beginning Auto code for space VuMark.");
                         telemetry.update();
+
                         lmotor.setPower(0.3);
                         rmotor.setPower(0.3);
-                        sleep(1000);
+                        sleep(300);
+
                         lmotor.setPower(0);
                         rmotor.setPower(0);
-                        marker.setPosition(0.65);
+
                         sleep(29990);
                     }
                 }
@@ -325,6 +358,7 @@ public class Auto extends LinearOpMode {
                     telemetry.addData("Visible Target", "none");
                 }
             }
+            sleep(30000);
 
 
             telemetry.update();
