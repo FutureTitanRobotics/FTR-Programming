@@ -31,10 +31,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="TankDrive", group="Linear Opmode")
+@TeleOp(name="FTC Workshop Demo", group="Linear Opmode")
 //@Disabled
 public class TankDrive extends LinearOpMode {
 
@@ -45,6 +46,8 @@ public class TankDrive extends LinearOpMode {
 
     DcMotor lmotor;
     DcMotor rmotor;
+    Servo lservo;
+    Servo rservo;
 
     @Override
     public void runOpMode() {// Start the code ("INIT" is pressed)
@@ -54,6 +57,13 @@ public class TankDrive extends LinearOpMode {
         // create 2 new motors (l and r for left and right)
         lmotor = hardwareMap.get(DcMotor.class, "left_drive");
         rmotor = hardwareMap.get(DcMotor.class, "right_drive");
+        lservo = hardwareMap.servo.get("lservo");
+        rservo = hardwareMap.servo.get("rservo");
+        
+        double servopos = 0.0;
+        double servopos2 = 0.0;
+        
+        rservo.setDirection(Servo.Direction.REVERSE);
 
         // the right motor has been reversed because when building, it is flipped over relative to the left one.
         lmotor.setDirection(DcMotor.Direction.REVERSE);
@@ -80,10 +90,28 @@ public class TankDrive extends LinearOpMode {
                 lmotor.setPower(0); // If the joystick is not being moved, stop all motors
                 rmotor.setPower(0);
             }
+            if (gamepad2.y) { //if y is pressed, make the elbow move up
+                servopos += step;
+                lservo.setPosition(servopos);
+                servopos2 += step;
+                rservo.setPosition(servopos2);
+                sleep(10);
+            }
+            else if (gamepad2.x) { //if x is pressed, make the elbow move down
+                servopos -= step;
+                lservo.setPosition(servopos);
+                servopos2 -= step;
+                rservo.setPosition(servopos2);
+                sleep(10);
+            }
+
         }
+        
 
         lmotor.setPower(0); // Stop all motors at the end of the game
         rmotor.setPower(0);
+        lservo.setPosition(0);
+        rservo.setPosition(0);
 
         // Show the elapsed game time at the end of the match
         telemetry.addData("Status", "Run Time: " + runtime.toString());
